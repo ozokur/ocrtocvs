@@ -1,0 +1,52 @@
+TÜRKÇE DİL PAKETİ KURULUMU (OPSİYONEL)
+========================================
+
+Tesseract başarıyla kuruldu ve İngilizce dil paketi ile çalışıyor.
+
+Türkçe karakterler (ç, ğ, ı, ö, ş, ü) için Türkçe dil paketi eklemek isterseniz:
+
+ADIM 1: Türkçe Dil Paketini İndirin
+------------------------------------
+URL: https://github.com/tesseract-ocr/tessdata/raw/main/tur.traineddata
+
+PowerShell komutu:
+Invoke-WebRequest -Uri "https://github.com/tesseract-ocr/tessdata/raw/main/tur.traineddata" -OutFile "tur.traineddata"
+
+
+ADIM 2: Administrator PowerShell Açın
+--------------------------------------
+1. Başlat menüsünde "PowerShell" arayın
+2. Sağ tıklayıp "Yönetici olarak çalıştır" seçin
+
+
+ADIM 3: Dosyayı Tesseract Klasörüne Kopyalayın
+-----------------------------------------------
+PowerShell komutları (admin):
+
+cd "indirme_klasörü"  # tur.traineddata'nın olduğu klasör
+Copy-Item "tur.traineddata" -Destination "C:\Program Files\Tesseract-OCR\tessdata\" -Force
+
+
+ADIM 4: config.py Dosyasını Güncelleyin
+----------------------------------------
+Dosya: D:\my github\ocrtocvs\config.py
+
+Değiştirilecek satır (16. satır):
+TESSERACT_LANG = 'eng'
+
+Yeni hali:
+TESSERACT_LANG = 'tur+eng'
+
+
+ADIM 5: Test Edin
+-----------------
+python test_app.py
+
+Türkçe dilinin listede göründüğünü doğrulayın.
+
+
+NOT: Türkçe dil paketi olmadan da program çalışır!
+Çoğu fiş için sayılar ve temel karakterler yeterlidir.
+
+========================================
+
